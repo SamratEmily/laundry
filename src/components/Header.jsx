@@ -2,26 +2,28 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X, Sparkles, Globe } from 'lucide-react'
 import WhatsAppButton from './WhatsAppButton'
-
-const NAV_LINKS = [
-  { label: 'Services', href: '#services' },
-  { label: 'Pricing', href: '#pricing' },
-  { label: 'How It Works', href: '#how-it-works' },
-  { label: 'Coverage', href: '#coverage' },
-  { label: 'Contact', href: '#contact' },
-]
+import { useLang } from '../context/LanguageContext'
+import translations from '../i18n/translations'
 
 const LANGUAGES = [
   { code: 'en', label: 'EN', name: 'English' },
   { code: 'ar', label: 'AR', name: 'العربية' },
-  // { code: 'ur', label: 'UR', name: 'اردو' },
 ]
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
-  const [activeLang, setActiveLang] = useState('en')
   const [langOpen, setLangOpen] = useState(false)
+  const { lang, setLang } = useLang()
+  const t = translations[lang].nav
+
+  const NAV_LINKS = [
+    { label: t.services, href: '#services' },
+    { label: t.pricing, href: '#pricing' },
+    { label: t.howItWorks, href: '#how-it-works' },
+    { label: t.coverage, href: '#coverage' },
+    { label: t.contact, href: '#contact' },
+  ]
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20)
@@ -35,12 +37,12 @@ export default function Header() {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5, ease: 'easeOut' }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
-          ? 'bg-[#0f2540]/95 backdrop-blur-md shadow-lg shadow-[#0f2540]/20'
-          : 'bg-transparent'
+        ? 'bg-[#0f2540]/95 backdrop-blur-md shadow-lg shadow-[#0f2540]/20'
+        : 'bg-transparent'
         }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 lg:h-20">
+        <div className="flex items-center justify-between h-16 lg:h-20 my-5">
           {/* Logo */}
           <a href="#" className="flex items-center gap-2 group no-underline">
             <div className="w-9 h-9 rounded-xl bg-gold-gradient flex items-center justify-center shadow-md">
@@ -75,7 +77,7 @@ export default function Header() {
                 className="flex items-center gap-1.5 text-white/70 hover:text-white text-sm font-medium transition-colors px-2 py-1.5 rounded-lg hover:bg-white/10"
               >
                 <Globe size={15} />
-                <span className="hidden sm:block">{LANGUAGES.find(l => l.code === activeLang)?.label}</span>
+                <span className="hidden sm:block">{LANGUAGES.find(l => l.code === lang)?.label}</span>
               </button>
               <AnimatePresence>
                 {langOpen && (
@@ -86,17 +88,17 @@ export default function Header() {
                     transition={{ duration: 0.15 }}
                     className="absolute right-0 top-full mt-2 bg-[#1a3a5c] border border-white/10 rounded-xl shadow-xl overflow-hidden min-w-[130px]"
                   >
-                    {LANGUAGES.map((lang) => (
+                    {LANGUAGES.map((l) => (
                       <button
-                        key={lang.code}
-                        onClick={() => { setActiveLang(lang.code); setLangOpen(false) }}
-                        className={`w-full text-left px-4 py-2.5 text-sm flex items-center gap-2 transition-colors ${activeLang === lang.code
-                            ? 'bg-[#c9a84c]/20 text-[#c9a84c] font-semibold'
-                            : 'text-white/80 hover:bg-white/10'
+                        key={l.code}
+                        onClick={() => { setLang(l.code); setLangOpen(false) }}
+                        className={`w-full text-left px-4 py-2.5 text-sm flex items-center gap-2 transition-colors ${lang === l.code
+                          ? 'bg-[#c9a84c]/20 text-[#c9a84c] font-semibold'
+                          : 'text-white/80 hover:bg-white/10'
                           }`}
                       >
-                        <span className="font-mono font-bold text-xs w-5">{lang.label}</span>
-                        <span>{lang.name}</span>
+                        <span className="font-mono font-bold text-xs w-5">{l.label}</span>
+                        <span>{l.name}</span>
                       </button>
                     ))}
                   </motion.div>
@@ -107,7 +109,7 @@ export default function Header() {
             {/* Book Now CTA */}
             <WhatsAppButton
               isGeneral
-              label="Book Now"
+              label={t.bookNow}
               size="sm"
               className="hidden sm:inline-flex"
             />
@@ -138,14 +140,14 @@ export default function Header() {
                 <a
                   key={link.href}
                   href={link.href}
-                  onClick={() => setMobileOpen(false)}
+                  onClick={() => setTimeout(() => setMobileOpen(false), 100)}
                   className="text-white/80 hover:text-[#c9a84c] py-2 text-base font-medium transition-colors no-underline border-b border-white/5 last:border-0"
                 >
                   {link.label}
                 </a>
               ))}
               <div className="pt-2">
-                <WhatsAppButton isGeneral label="Book Now" size="md" className="w-full" />
+                <WhatsAppButton isGeneral label={t.bookNow} size="md" className="w-full" />
               </div>
             </div>
           </motion.div>
