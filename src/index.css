@@ -1,0 +1,77 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #1a3a5c;
+  --color-primary-dark: #0f2540;
+  --color-primary-light: #2d5a8e;
+  --color-gold: #c9a84c;
+  --color-gold-light: #e2c276;
+  --color-gold-dark: #a8882e;
+  --color-surface: #f8f9fb;
+  --color-surface-alt: #eef1f6;
+  --color-whatsapp: #25D366;
+  --color-whatsapp-dark: #1da851;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes whatsapp-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+  70% { box-shadow: 0 0 0 14px rgba(37, 211, 102, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background-color: #ffffff;
+    color: #1a1a2e;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+@layer utilities {
+  .text-gradient-gold {
+    background: linear-gradient(135deg, #c9a84c, #e2c276);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .bg-primary-gradient {
+    background: linear-gradient(135deg, #1a3a5c 0%, #0f2540 100%);
+  }
+
+  .bg-gold-gradient {
+    background: linear-gradient(135deg, #c9a84c 0%, #a8882e 100%);
+  }
+
+  .card-shadow {
+    box-shadow: 0 4px 24px rgba(26, 58, 92, 0.10), 0 1.5px 6px rgba(26, 58, 92, 0.07);
+  }
+
+  .card-shadow-lg {
+    box-shadow: 0 8px 40px rgba(26, 58, 92, 0.15), 0 2px 10px rgba(26, 58, 92, 0.10);
+  }
+
+  .whatsapp-glow {
+    animation: whatsapp-pulse 2s infinite;
+  }
+
+  .float-animation {
+    animation: float 3s ease-in-out infinite;
+  }
+}
