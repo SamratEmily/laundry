@@ -140,7 +140,7 @@ const translations = {
       nav: [
         { label: 'Services', href: '#services' },
         { label: 'Pricing', href: '#pricing' },
-        { label: 'How It Works', href: '#how-it-works' },
+        // { label: 'How It Works', href: '#how-it-works' },
         { label: 'Coverage', href: '#coverage' },
       ],
       whatsappLabel: 'WhatsApp / Call',

@@ -20,7 +20,7 @@ export default function Header() {
   const NAV_LINKS = [
     { label: t.services, href: '#services' },
     { label: t.pricing, href: '#pricing' },
-    { label: t.howItWorks, href: '#how-it-works' },
+    // { label: t.howItWorks, href: '#how-it-works' },
     { label: t.coverage, href: '#coverage' },
     { label: t.contact, href: '#contact' },
   ]

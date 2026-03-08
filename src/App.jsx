@@ -23,9 +23,9 @@ function AppContent() {
       <Header />
       <main>
         <Hero />
-        <HowItWorks />
-        <ServiceZones />
+        {/* <HowItWorks /> */}
         <Pricing />
+        <ServiceZones />
         <ComparisonTable />
       </main>
       <Footer />
