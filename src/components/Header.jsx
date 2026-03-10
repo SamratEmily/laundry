@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X, Sparkles, Globe } from 'lucide-react'
+import { Menu, X, Globe } from 'lucide-react'
 import WhatsAppButton from './WhatsAppButton'
 import { useLang } from '../context/LanguageContext'
 import translations from '../i18n/translations'
+import logoIcon from '../assets/app-icon-logo.png'
 
 const LANGUAGES = [
   { code: 'en', label: 'EN', name: 'English' },
@@ -45,9 +46,7 @@ export default function Header() {
         <div className="flex items-center justify-between h-16 lg:h-20 my-5">
           {/* Logo */}
           <a href="#" className="flex items-center gap-2 group no-underline">
-            <div className="w-9 h-9 rounded-xl bg-gold-gradient flex items-center justify-center shadow-md">
-              <Sparkles size={18} className="text-white" />
-            </div>
+            <img src={logoIcon} alt="Easy Laundry" className="w-10 h-10 rounded-xl shadow-md object-contain" />
             <div className="leading-tight">
               <div className="text-white font-extrabold text-xl tracking-tight">Easy Laundry</div>
               <div className="text-[#c9a84c] text-[10px] font-semibold tracking-widest uppercase">Makkah</div>

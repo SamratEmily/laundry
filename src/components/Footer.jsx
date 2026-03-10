@@ -1,8 +1,10 @@
 import { motion } from 'framer-motion'
-import { Phone, MapPin, Clock, Mail, Sparkles, MessageCircle, Instagram, Facebook } from 'lucide-react'
+import { Phone, MapPin, Clock, Mail, MessageCircle, Instagram, Facebook } from 'lucide-react'
 import WhatsAppButton from './WhatsAppButton'
 import { useLang } from '../context/LanguageContext'
 import translations from '../i18n/translations'
+import logoIcon from '../assets/app-icon-logo.png'
+import heroBanner from '../assets/hero_banner.png'
 
 export default function Footer() {
   const { lang } = useLang()
@@ -11,8 +13,13 @@ export default function Footer() {
   return (
     <footer id="contact" className="bg-[#0a1e35] text-white">
       {/* CTA Banner */}
-      <div className="bg-gold-gradient py-10 px-4">
-        <div className="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
+      <div className="relative py-10 px-4 overflow-hidden">
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: `url(${heroBanner})` }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#c9a84c]/40 to-[#a8882e]/40" />
+        <div className="relative z-10 max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
           <div>
             <h3 className="text-white text-2xl sm:text-3xl font-extrabold mb-1 drop-shadow">
               {t.ctaTitle}
@@ -36,9 +43,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="lg:col-span-1">
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-9 h-9 rounded-xl bg-gold-gradient flex items-center justify-center shadow-md">
-                <Sparkles size={17} className="text-white" />
-              </div>
+              <img src={logoIcon} alt="Easy Laundry" className="w-10 h-10 rounded-xl shadow-md object-contain" />
               <div>
                 <div className="font-extrabold text-xl text-white leading-tight">Easy Laundry</div>
                 <div className="text-[#c9a84c] text-[10px] font-semibold tracking-widest uppercase">Makkah</div>

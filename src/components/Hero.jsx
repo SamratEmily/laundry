@@ -1,10 +1,16 @@
 import { motion } from 'framer-motion'
-import { Clock, Star, Shield, ArrowDown } from 'lucide-react'
+import { Clock, ArrowDown } from 'lucide-react'
 import WhatsAppButton from './WhatsAppButton'
 import { useLang } from '../context/LanguageContext'
 import translations from '../i18n/translations'
+import heroBg from '../assets/hero-banner-2.jpeg'
+import fastPickupIcon from '../assets/fast-pickup.png'
+import ihramCareIcon from '../assets/ihram-care.png'
+import hotelDeliveryIcon from '../assets/hotel-delivery.png'
+import available247Icon from '../assets/24-7-available-icon.png'
+import whatsappOrderIcon from '../assets/whatsapp-order-icon.png'
 
-const BADGE_ICONS = [Clock, Star, Shield]
+const SERVICE_ICONS = [fastPickupIcon, ihramCareIcon, hotelDeliveryIcon, available247Icon, whatsappOrderIcon]
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -20,15 +26,21 @@ export default function Hero() {
   const t = translations[lang].hero
 
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-primary-gradient">
+    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden">
+      {/* Background image */}
+      <div
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url(${heroBg})` }}
+      />
+      {/* Dark overlay for readability */}
+      <div className="absolute inset-0 bg-[#0f2540]/35" />
       {/* Decorative background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-32 -right-32 w-[600px] h-[600px] rounded-full bg-[#2d5a8e]/30 blur-3xl" />
+        <div className="absolute -top-32 -right-32 w-[600px] h-[600px] rounded-full bg-[#2d5a8e]/20 blur-3xl" />
         <div className="absolute -bottom-32 -left-32 w-[500px] h-[500px] rounded-full bg-[#c9a84c]/10 blur-3xl" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-[#1a3a5c]/40 blur-3xl" />
         {/* Grid pattern */}
         <div
-          className="absolute inset-0 opacity-[0.04]"
+          className="absolute inset-0 opacity-[0.03]"
           style={{
             backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
             backgroundSize: '50px 50px',
@@ -110,25 +122,23 @@ export default function Hero() {
           </motion.a>
         </motion.div>
 
-        {/* Trust badges */}
+        {/* Service icons strip */}
         <motion.div
           custom={5}
           variants={fadeUp}
           initial="hidden"
           animate="visible"
-          className="flex flex-wrap items-center justify-center gap-6"
+          className="flex flex-wrap items-center justify-center gap-5 sm:gap-8"
         >
-          {t.badges.map((text, i) => {
-            const Icon = BADGE_ICONS[i]
-            return (
-              <div key={text} className="flex items-center gap-2 text-white/70">
-                <div className="w-8 h-8 rounded-full bg-[#c9a84c]/20 flex items-center justify-center">
-                  <Icon size={15} className="text-[#c9a84c]" />
-                </div>
-                <span className="text-sm font-medium">{text}</span>
-              </div>
-            )
-          })}
+          {SERVICE_ICONS.map((icon, i) => (
+            <motion.div
+              key={i}
+              whileHover={{ scale: 1.1 }}
+              className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-white/20 backdrop-blur-md border border-white/25 flex items-center justify-center p-2"
+            >
+              <img src={icon} alt="" className="w-full h-full object-contain" />
+            </motion.div>
+          ))}
         </motion.div>
 
         {/* Scroll cue */}

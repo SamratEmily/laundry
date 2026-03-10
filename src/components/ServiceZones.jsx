@@ -3,6 +3,8 @@ import { MapPin, Clock, Zap, CheckCircle2 } from 'lucide-react'
 import WhatsAppButton from './WhatsAppButton'
 import { useLang } from '../context/LanguageContext'
 import translations from '../i18n/translations'
+import serviceZoneMap from '../assets/service_zone.png'
+import deliveryPickupBanner from '../assets/delivery_pickup.png'
 
 const ZONE_META = [
   { pickup: '15 min', delivery: '12-18 hrs', badgeColor: '#25D366', icon: '🕌', popular: true },
@@ -52,6 +54,17 @@ export default function ServiceZones() {
           <p className="text-gray-500 text-lg max-w-xl mx-auto">
             {t.sub}
           </p>
+        </motion.div>
+
+        {/* Service zone map */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="mb-12 rounded-3xl overflow-hidden shadow-xl"
+        >
+          <img src={serviceZoneMap} alt="Makkah Service Coverage Map" className="w-full h-50 object-cover" />
         </motion.div>
 
         {/* Zone cards */}
@@ -125,11 +138,13 @@ export default function ServiceZones() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="mt-12 bg-primary-gradient rounded-3xl p-8 sm:p-10 text-center text-white relative overflow-hidden"
+          className="mt-12 rounded-3xl p-8 sm:p-10 text-center text-white relative overflow-hidden"
         >
-          <div className="absolute inset-0 opacity-10" style={{
-            backgroundImage: `radial-gradient(circle at 20% 50%, #c9a84c 0%, transparent 50%), radial-gradient(circle at 80% 50%, #2d5a8e 0%, transparent 50%)`
-          }} />
+          <div
+            className="absolute inset-0 bg-cover bg-center"
+            style={{ backgroundImage: `url(${deliveryPickupBanner})` }}
+          />
+          <div className="absolute inset-0 bg-[#0f2540]/75" />
           <div className="relative z-10">
             <div className="flex items-center justify-center gap-2 mb-3">
               <CheckCircle2 size={20} className="text-[#c9a84c]" />

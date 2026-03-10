@@ -3,6 +3,7 @@ import { Check, Zap, Crown, Sparkles, ShirtIcon, Star } from 'lucide-react'
 import WhatsAppButton from './WhatsAppButton'
 import { useLang } from '../context/LanguageContext'
 import translations from '../i18n/translations'
+import pricingBg from '../assets/pricing.png'
 
 const PACKAGE_META = [
   { id: 'basic', name: 'Basic', price: 12, unit: 'SAR/kg', icon: ShirtIcon, color: '#2d5a8e', bgColor: '#eef4ff', popular: false },
@@ -31,7 +32,12 @@ export default function Pricing() {
   const t = translations[lang].pricing
 
   return (
-    <section id="pricing" className="py-20 lg:py-28 bg-white">
+    <section id="pricing" className="py-20 lg:py-28 bg-white relative overflow-hidden">
+      {/* Decorative background image */}
+      <div
+        className="absolute top-0 right-0 w-1/3 h-full bg-contain bg-no-repeat bg-right-top opacity-[0.06] pointer-events-none"
+        style={{ backgroundImage: `url(${pricingBg})` }}
+      />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section header */}
         <motion.div

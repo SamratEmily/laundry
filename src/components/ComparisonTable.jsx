@@ -3,6 +3,7 @@ import { Check, X, Trophy } from 'lucide-react'
 import WhatsAppButton from './WhatsAppButton'
 import { useLang } from '../context/LanguageContext'
 import translations from '../i18n/translations'
+import serviceBanner from '../assets/24_7_service.png'
 
 const COMPARISON_VALUES = [
   { us: true, others: false },
@@ -119,10 +120,12 @@ export default function ComparisonTable() {
           ))}
 
           {/* Footer CTA */}
-          <div className="bg-primary-gradient p-6 text-center relative overflow-hidden">
-            <div className="absolute inset-0 opacity-10" style={{
-              backgroundImage: `radial-gradient(circle at 30% 50%, #c9a84c 0%, transparent 50%)`
-            }} />
+          <div className="p-6 text-center relative overflow-hidden">
+            <div
+              className="absolute inset-0 bg-cover bg-center"
+              style={{ backgroundImage: `url(${serviceBanner})` }}
+            />
+            <div className="absolute inset-0 bg-[#0f2540]/80" />
             <div className="relative z-10">
               <p className="text-white/80 text-sm mb-4">
                 {t.ctaSub}
