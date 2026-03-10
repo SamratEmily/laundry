@@ -18,7 +18,7 @@ export default function Footer() {
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${heroBanner})` }}
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#c9a84c]/40 to-[#a8882e]/40" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#c9a84c]/30 to-[#a8882e]/50" />
         <div className="relative z-10 max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
           <div>
             <h3 className="text-white text-2xl sm:text-3xl font-extrabold mb-1 drop-shadow">

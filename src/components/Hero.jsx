@@ -134,7 +134,7 @@ export default function Hero() {
             <motion.div
               key={i}
               whileHover={{ scale: 1.1 }}
-              className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-white/20 backdrop-blur-md border border-white/25 flex items-center justify-center p-2"
+              className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-white backdrop-blur-md border border-white/25 flex items-center justify-center p-2"
             >
               <img src={icon} alt="" className="w-full h-full object-contain" />
             </motion.div>
@@ -148,7 +148,7 @@ export default function Hero() {
           transition={{ delay: 1.5, duration: 0.5 }}
           className="mt-16 flex justify-center"
         >
-          <a href="#services" className="flex flex-col items-center gap-2 text-white/40 hover:text-white/70 transition-colors no-underline group">
+          <a href="#services" className="flex flex-col items-center gap-2 text-white hover:text-white transition-colors no-underline group">
             <span className="text-xs font-medium tracking-widest uppercase">{t.explore}</span>
             <motion.div
               animate={{ y: [0, 6, 0] }}

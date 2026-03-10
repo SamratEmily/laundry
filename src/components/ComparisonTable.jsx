@@ -125,7 +125,7 @@ export default function ComparisonTable() {
               className="absolute inset-0 bg-cover bg-center"
               style={{ backgroundImage: `url(${serviceBanner})` }}
             />
-            <div className="absolute inset-0 bg-[#0f2540]/80" />
+            <div className="absolute inset-0 bg-[#0f2540]/75" />
             <div className="relative z-10">
               <p className="text-white/80 text-sm mb-4">
                 {t.ctaSub}
