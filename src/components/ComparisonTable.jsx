@@ -1,20 +1,23 @@
 import { motion } from 'framer-motion'
 import { Check, X, Trophy } from 'lucide-react'
 import WhatsAppButton from './WhatsAppButton'
+import { useLang } from '../context/LanguageContext'
+import translations from '../i18n/translations'
+import serviceBanner from '../assets/24_7_service.png'
 
-const COMPARISON_ROWS = [
-  { feature: '24/7 Service Availability', us: true, others: false },
-  { feature: 'Free Hotel Pickup', us: true, others: false },
-  { feature: 'Free Hotel Delivery', us: true, others: false },
-  { feature: '15-Minute Pickup Guarantee', us: true, others: false },
-  { feature: 'Same-Day Express Option', us: true, others: false },
-  { feature: 'Transparent Pricing', us: true, others: 'Partial' },
-  { feature: 'Ihram Specialist Care', us: true, others: 'Partial' },
-  { feature: 'Multi-language Support', us: true, others: false },
-  { feature: 'No Minimum Order Weight', us: false, others: false },
-  { feature: 'WhatsApp Direct Ordering', us: true, others: false },
-  { feature: 'Stain Removal Treatment', us: true, others: 'Partial' },
-  { feature: 'Satisfaction Guarantee', us: true, others: false },
+const COMPARISON_VALUES = [
+  { us: true, others: false },
+  { us: true, others: false },
+  { us: true, others: false },
+  { us: true, others: false },
+  { us: true, others: false },
+  { us: true, others: 'Partial' },
+  { us: true, others: 'Partial' },
+  { us: true, others: false },
+  { us: false, others: false },
+  { us: true, others: false },
+  { us: true, others: 'Partial' },
+  { us: true, others: false },
 ]
 
 function CellIcon({ value }) {
@@ -38,6 +41,9 @@ function CellIcon({ value }) {
 }
 
 export default function ComparisonTable() {
+  const { lang } = useLang()
+  const t = translations[lang].comparison
+
   return (
     <section id="services" className="py-20 lg:py-28 bg-[#f8f9fb]">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -51,14 +57,14 @@ export default function ComparisonTable() {
         >
           <div className="inline-flex items-center gap-2 bg-[#c9a84c]/15 text-[#a8882e] px-4 py-1.5 rounded-full text-sm font-semibold mb-4">
             <Trophy size={14} />
-            Why Choose Us
+            {t.badge}
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0f2540] mb-4">
-            Easy Laundry{' '}
-            <span className="text-gradient-gold">vs. Others</span>
+            {t.h2Part1}{' '}
+            <span className="text-gradient-gold">{t.h2Highlight}</span>
           </h2>
           <p className="text-gray-500 text-lg max-w-xl mx-auto">
-            See how we stack up against typical laundry services in Makkah.
+            {t.sub}
           </p>
         </motion.div>
 
@@ -72,7 +78,7 @@ export default function ComparisonTable() {
         >
           {/* Table header */}
           <div className="grid grid-cols-[1fr_120px_120px] sm:grid-cols-[1fr_140px_140px] bg-[#0f2540] text-white">
-            <div className="px-5 py-4 font-semibold text-white/70 text-sm">Feature</div>
+            <div className="px-5 py-4 font-semibold text-white/70 text-sm">{t.colFeature}</div>
             <div className="px-3 py-4 text-center">
               <div className="flex flex-col items-center gap-1">
                 <div className="w-8 h-8 rounded-full bg-gold-gradient flex items-center justify-center">
@@ -86,15 +92,15 @@ export default function ComparisonTable() {
                 <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center">
                   <span className="text-white/50 text-sm">?</span>
                 </div>
-                <span className="font-bold text-white/50 text-sm sm:text-base">Others</span>
+                <span className="font-bold text-white/50 text-sm sm:text-base">{t.colOthers}</span>
               </div>
             </div>
           </div>
 
           {/* Rows */}
-          {COMPARISON_ROWS.map((row, i) => (
+          {t.features.map((feature, i) => (
             <motion.div
-              key={row.feature}
+              key={feature}
               initial={{ opacity: 0, x: -10 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
@@ -103,26 +109,28 @@ export default function ComparisonTable() {
                 i % 2 === 0 ? 'bg-white' : 'bg-[#fafafa]'
               }`}
             >
-              <div className="px-5 py-3.5 text-sm font-medium text-gray-700">{row.feature}</div>
+              <div className="px-5 py-3.5 text-sm font-medium text-gray-700">{feature}</div>
               <div className="px-3 py-3.5 text-center">
-                <CellIcon value={row.us} />
+                <CellIcon value={COMPARISON_VALUES[i].us} />
               </div>
               <div className="px-3 py-3.5 text-center">
-                <CellIcon value={row.others} />
+                <CellIcon value={COMPARISON_VALUES[i].others} />
               </div>
             </motion.div>
           ))}
 
           {/* Footer CTA */}
-          <div className="bg-primary-gradient p-6 text-center relative overflow-hidden">
-            <div className="absolute inset-0 opacity-10" style={{
-              backgroundImage: `radial-gradient(circle at 30% 50%, #c9a84c 0%, transparent 50%)`
-            }} />
+          <div className="p-6 text-center relative overflow-hidden">
+            <div
+              className="absolute inset-0 bg-cover bg-center"
+              style={{ backgroundImage: `url(${serviceBanner})` }}
+            />
+            <div className="absolute inset-0 bg-[#0f2540]/75" />
             <div className="relative z-10">
               <p className="text-white/80 text-sm mb-4">
-                Ready to experience the difference? Book your first pickup now.
+                {t.ctaSub}
               </p>
-              <WhatsAppButton isGeneral label="Book My Pickup Now" size="md" />
+              <WhatsAppButton isGeneral label={t.ctaBtn} size="md" />
             </div>
           </div>
         </motion.div>

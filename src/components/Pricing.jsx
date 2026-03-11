@@ -1,79 +1,21 @@
 import { motion } from 'framer-motion'
 import { Check, Zap, Crown, Sparkles, ShirtIcon, Star } from 'lucide-react'
 import WhatsAppButton from './WhatsAppButton'
+import { useLang } from '../context/LanguageContext'
+import translations from '../i18n/translations'
+import pricingBg from '../assets/pricing.png'
 
-const PACKAGES = [
-  {
-    id: 'basic',
-    name: 'Basic',
-    packageName: 'Basic',
-    tagline: 'Great value for everyday clothes',
-    price: 12,
-    unit: 'SAR/kg',
-    icon: ShirtIcon,
-    color: '#2d5a8e',
-    bgColor: '#eef4ff',
-    popular: false,
-    features: [
-      'Wash & Fold',
-      'Regular detergent',
-      '24-hour turnaround',
-      'Free pickup',
-      'Hotel delivery',
-    ],
-    notIncluded: ['Premium detergent', 'Express service'],
-  },
-  {
-    id: 'premium',
-    name: 'Premium',
-    packageName: 'Premium',
-    tagline: 'Best seller — most pilgrims choose this',
-    price: 18,
-    unit: 'SAR/kg',
-    icon: Star,
-    color: '#c9a84c',
-    bgColor: '#fffbf0',
-    popular: true,
-    features: [
-      'Wash, Dry & Fold',
-      'Premium detergent',
-      '18-hour turnaround',
-      'Free pickup & delivery',
-      'Fabric softener included',
-      'Individual item bagging',
-    ],
-    notIncluded: [],
-  },
-  {
-    id: 'vip',
-    name: 'VIP',
-    packageName: 'VIP',
-    tagline: 'White-glove treatment for your finest garments',
-    price: 25,
-    unit: 'SAR/kg',
-    icon: Crown,
-    color: '#0f2540',
-    bgColor: '#f0f4ff',
-    popular: false,
-    features: [
-      'Wash, Dry, Iron & Fold',
-      'Luxury detergent',
-      '12-hour express turnaround',
-      'Priority pickup (15 min)',
-      'Fabric softener & perfume',
-      'Individual garment care',
-      'Stain treatment included',
-      'Branded packaging',
-    ],
-    notIncluded: [],
-  },
+const PACKAGE_META = [
+  { id: 'basic', name: 'Basic', price: 12, unit: 'SAR/kg', icon: ShirtIcon, color: '#2d5a8e', bgColor: '#eef4ff', popular: false },
+  { id: 'premium', name: 'Premium', price: 18, unit: 'SAR/kg', icon: Star, color: '#c9a84c', bgColor: '#fffbf0', popular: true },
+  { id: 'vip', name: 'VIP', price: 25, unit: 'SAR/kg', icon: Crown, color: '#0f2540', bgColor: '#f0f4ff', popular: false },
 ]
 
-const SPECIAL_ITEMS = [
-  { name: 'Ihram (Top + Bottom)', price: '14 SAR/piece', icon: '🕌', desc: 'Gentle hand-wash + fold' },
-  { name: 'Formal Wear / Thoub', price: '18 SAR/kg', icon: '👔', desc: 'Washed, pressed & hung' },
-  { name: 'Abaya / Jalabiya', price: '20 SAR/piece', icon: '👗', desc: 'Delicate care cycle' },
-  { name: 'Bed Sheets / Linen', price: '15 SAR/kg', icon: '🛏️', desc: 'Hygienic hot wash' },
+const SPECIAL_ITEM_META = [
+  { price: '14 SAR/piece', icon: '🕌' },
+  { price: '18 SAR/kg', icon: '👔' },
+  { price: '20 SAR/piece', icon: '👗' },
+  { price: '15 SAR/kg', icon: '🛏️' },
 ]
 
 const cardVariants = {
@@ -86,8 +28,16 @@ const cardVariants = {
 }
 
 export default function Pricing() {
+  const { lang } = useLang()
+  const t = translations[lang].pricing
+
   return (
-    <section id="pricing" className="py-20 lg:py-28 bg-white">
+    <section id="pricing" className="py-20 lg:py-28 bg-white relative overflow-hidden">
+      {/* Decorative background image */}
+      <div
+        className="absolute top-0 right-0 w-1/3 h-full bg-contain bg-no-repeat bg-right-top opacity-[0.06] pointer-events-none"
+        style={{ backgroundImage: `url(${pricingBg})` }}
+      />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section header */}
         <motion.div
@@ -99,21 +49,22 @@ export default function Pricing() {
         >
           <div className="inline-flex items-center gap-2 bg-[#c9a84c]/15 text-[#a8882e] px-4 py-1.5 rounded-full text-sm font-semibold mb-4">
             <Sparkles size={14} />
-            Transparent Pricing
+            {t.badge}
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0f2540] mb-4">
-            Simple, Honest{' '}
-            <span className="text-gradient-gold">Pricing</span>
+            {t.h2Part1}{' '}
+            <span className="text-gradient-gold">{t.h2Highlight}</span>
           </h2>
           <p className="text-gray-500 text-lg max-w-xl mx-auto">
-            No hidden fees. No surprises. Just clean clothes at fair prices.
+            {t.sub}
           </p>
         </motion.div>
 
         {/* Package cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-          {PACKAGES.map((pkg, i) => {
+          {PACKAGE_META.map((pkg, i) => {
             const Icon = pkg.icon
+            const pkgT = t.packages[i]
             return (
               <motion.div
                 key={pkg.id}
@@ -131,7 +82,7 @@ export default function Pricing() {
               >
                 {pkg.popular && (
                   <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gold-gradient text-white text-xs font-bold px-4 py-1.5 rounded-full shadow-lg whitespace-nowrap">
-                    ⭐ Most Popular
+                    {t.mostPopular}
                   </div>
                 )}
 
@@ -158,7 +109,7 @@ export default function Pricing() {
                         pkg.popular ? 'text-white/60' : 'text-gray-400'
                       }`}
                     >
-                      {pkg.tagline}
+                      {pkgT.tagline}
                     </p>
                   </div>
                 </div>
@@ -185,7 +136,7 @@ export default function Pricing() {
 
                 {/* Features */}
                 <ul className="flex-1 space-y-2.5 mb-7">
-                  {pkg.features.map((feat) => (
+                  {pkgT.features.map((feat) => (
                     <li key={feat} className="flex items-center gap-2.5">
                       <div
                         className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 ${
@@ -210,8 +161,8 @@ export default function Pricing() {
                 </ul>
 
                 <WhatsAppButton
-                  packageName={pkg.packageName}
-                  label={`Book ${pkg.name}`}
+                  packageName={pkg.name}
+                  label={pkgT.btnLabel}
                   size="md"
                   variant={pkg.popular ? 'filled' : 'outline'}
                   className={`w-full justify-center ${
@@ -234,13 +185,13 @@ export default function Pricing() {
         >
           <div className="text-center mb-8">
             <h3 className="text-2xl sm:text-3xl font-extrabold text-[#0f2540] mb-2">
-              Special Item Pricing
+              {t.specialTitle}
             </h3>
-            <p className="text-gray-500">Tailored rates for specific garments — common for Hajj &amp; Umrah pilgrims.</p>
+            <p className="text-gray-500">{t.specialSub}</p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {SPECIAL_ITEMS.map((item, i) => (
+            {t.specialItems.map((item, i) => (
               <motion.div
                 key={item.name}
                 initial={{ opacity: 0, y: 16 }}
@@ -250,11 +201,11 @@ export default function Pricing() {
                 whileHover={{ y: -3, transition: { duration: 0.18 } }}
                 className="bg-[#f8f9fb] border border-gray-100 rounded-2xl p-5 flex flex-col items-center text-center card-shadow hover:border-[#c9a84c]/40 transition-all duration-200"
               >
-                <span className="text-3xl mb-3">{item.icon}</span>
+                <span className="text-3xl mb-3">{SPECIAL_ITEM_META[i].icon}</span>
                 <h4 className="font-bold text-[#0f2540] text-sm mb-1">{item.name}</h4>
                 <p className="text-gray-400 text-xs mb-3">{item.desc}</p>
                 <span className="bg-gold-gradient text-white text-sm font-extrabold px-3 py-1 rounded-full">
-                  {item.price}
+                  {SPECIAL_ITEM_META[i].price}
                 </span>
               </motion.div>
             ))}
@@ -263,7 +214,7 @@ export default function Pricing() {
           {/* Note */}
           <div className="mt-6 flex items-center justify-center gap-2 text-gray-400 text-sm">
             <Zap size={14} className="text-[#c9a84c]" />
-            <span>Minimum order: 3 kg. Prices include free hotel pickup & delivery within service zones.</span>
+            <span>{t.minimumNote}</span>
           </div>
         </motion.div>
       </div>
