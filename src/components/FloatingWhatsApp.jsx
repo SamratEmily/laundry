@@ -2,7 +2,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useState } from 'react'
 import { MessageCircle, X } from 'lucide-react'
 
-const WHATSAPP_NUMBER = '8801763257219'
+const WHATSAPP_NUMBER = '966559637429'
 const OWNER_NAME = 'Ripon'
 
 const QUICK_MESSAGES = [

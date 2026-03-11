@@ -121,10 +121,10 @@ export default function Footer() {
                 <div>
                   <div className="text-white/40 text-xs mb-0.5">{t.whatsappLabel}</div>
                   <a
-                    href="https://wa.me/8801763257219"
+                    href="https://wa.me/966559637429"
                     className="text-white text-sm font-semibold no-underline hover:text-[#c9a84c] transition-colors"
                   >
-                    +880 1763-257219
+                    +966 55 963 7429
                   </a>
                 </div>
               </li>

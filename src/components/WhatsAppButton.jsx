@@ -1,7 +1,7 @@
 import { MessageCircle } from 'lucide-react'
 import { motion } from 'framer-motion'
 
-const WHATSAPP_NUMBER = '8801763257219'
+const WHATSAPP_NUMBER = '966559637429'
 const OWNER_NAME = 'Ripon'
 
 function buildWhatsAppMessage({ packageName, serviceType, isGeneral }) {
