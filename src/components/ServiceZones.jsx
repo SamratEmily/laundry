@@ -3,7 +3,7 @@ import { MapPin, Clock, Zap, CheckCircle2 } from 'lucide-react'
 import WhatsAppButton from './WhatsAppButton'
 import { useLang } from '../context/LanguageContext'
 import translations from '../i18n/translations'
-import serviceZoneMap from '../assets/service_zone.png'
+
 import deliveryPickupBanner from '../assets/delivery_pickup.png'
 
 const ZONE_META = [
@@ -64,7 +64,15 @@ export default function ServiceZones() {
           transition={{ duration: 0.6 }}
           className="mb-12 rounded-3xl overflow-hidden shadow-xl"
         >
-          <img src={serviceZoneMap} alt="Makkah Service Coverage Map" className="w-full h-50 object-cover" />
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3714.7313049264253!2d39.811016075267!3d21.40048198034358!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjHCsDI0JzAxLjciTiAzOcKwNDgnNDguOSJF!5e0!3m2!1sen!2sbd!4v1773204108261!5m2!1sen!2sbd"
+            className="w-full h-[450px]"
+            style={{ border: 0 }}
+            allowFullScreen=""
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            title="Makkah Service Coverage Map"
+          />
         </motion.div>
 
         {/* Zone cards */}
@@ -82,11 +90,10 @@ export default function ServiceZones() {
                 key={zone.name}
                 variants={cardVariants}
                 whileHover={{ y: -4, transition: { duration: 0.2 } }}
-                className={`relative bg-white rounded-2xl p-6 card-shadow border transition-all duration-200 ${
-                  meta.popular
-                    ? 'border-[#c9a84c]/50 ring-2 ring-[#c9a84c]/20'
-                    : 'border-gray-100 hover:border-[#1a3a5c]/20'
-                }`}
+                className={`relative bg-white rounded-2xl p-6 card-shadow border transition-all duration-200 ${meta.popular
+                  ? 'border-[#c9a84c]/50 ring-2 ring-[#c9a84c]/20'
+                  : 'border-gray-100 hover:border-[#1a3a5c]/20'
+                  }`}
               >
                 {meta.popular && (
                   <div className="absolute -top-3 left-6 bg-gold-gradient text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">
